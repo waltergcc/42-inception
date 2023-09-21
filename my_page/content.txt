@@ -2,6 +2,7 @@ My page config
 
 Context menu
 Home
+https://wcorrea-.42.fr/
 
 Feedback
 https://wcorrea-.42.fr/?p=1
@@ -10,10 +11,10 @@ Sample
 https://wcorrea-.42.fr/?page_id=2
 
 Linkedin
-https://github.com/waltergcc
+https://www.linkedin.com/in/waltergccruz/
 
 Github
-Unlocking the Power of Containerization with Docker-compose
+https://github.com/waltergcc
 
 H1
 Learning to work with containers
