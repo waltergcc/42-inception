@@ -541,7 +541,7 @@ https://cdimage.debian.org/cdimage/archive/11.7.0/amd64/iso-cd/debian-11.7.0-amd
 1. Select install
 2. then follow the normal installation steps, choosing region, user, password, etc. Nothing special here.
 3. In the partition menu, select the guided - use entire disk - LVM
-4. After that, Partition disks: var/ temp/ home/ partitions and Confirm it.
+4. After that, select separate var/ tmp/ home/ partitions and Confirm it.
 5. In the software selection, select only XFCE, Webserver, SSH server and standard system utilities.
 6. In the GRUB menu, select yes and select the disk that you created.
 7. At the end, your VM will reboot with the debian installed.
@@ -567,10 +567,11 @@ Now, reboot the VM.
 #### 4.3.2. Enable the Shared folder
 1. In your main PC, create a folder in your home directory called `shared` . This folder will be used to share files between your main PC and the VM.
 2. In the VirtualBox settings > Shared Folders, add a new shared folder with the name `shared` and the path to the folder that you created in your main PC and check the auto-mount and make permanent options.
-3. Now, in the VM, at the VirtualBox menu > Devices > select Download Guest Additions CD image.
-4. Open the terminal in the CD folder and run the following command then reboot the VM.
+3. Now, in the VM, at the VirtualBox menu > Devices > select insert Guest Additions CD image.
+4. Open the terminal in the CD folder and run the following command.
 ```bash
 sudo sh VBoxLinuxAdditions.run
+sudo reboot
 ```
 5. add your user to the vboxsf group and define your user as owner of the shared folder.
 ```bash
@@ -638,7 +639,7 @@ https://login.42.fr/wp-admin
 ```
 
 ### 5.4. mariaDB check
-1. Open another terminal and keep the terminal with the compose running. On this other terminal, run the following command to enter in the mariadb container.
+Open another terminal and keep the terminal with the compose running. On this other terminal, run the following command to enter in the mariadb container.
 ```bash
 docker exec -it mariadb /bin/bash
 ```
