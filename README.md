@@ -44,7 +44,7 @@ COPY	conf/50-server.cnf /etc/mysql/mariadb.conf.d/
 ```
 5. Copy the setup script to the container and change its permissions
 ```Dockerfile
-COPY tools/setup.sh /bin/
+COPY	tools/setup.sh /bin/
 RUN	chmod +x /bin/setup.sh
 ```
 6. Execute the setup script then start the database server. At the end of the script, it'll call the `mysqld_safe` command to start the database server.
@@ -269,21 +269,21 @@ ARG	COMMON_NAME=login.42.fr
 ```
 5. Create the folder for the certificates and generate these. It'll create a self-signed certificate that will be valid for 365 days. The `subj` flag is used to set the certificate information.
 ```Dockerfile
-RUN mkdir -p ${CERT_FOLDER} && \
+RUN	mkdir -p ${CERT_FOLDER} && \
 	openssl req -newkey rsa:4096 -x509 -sha256 -days 365 -nodes \
-    -out ${CERTIFICATE} \
-    -keyout ${KEY} \
-    -subj "/C=${COUNTRY}/ST=${STATE}/L=${LOCALITY}/O=${ORGANIZATION}/OU=${UNIT}/CN=${COMMON_NAME}"
+	-out ${CERTIFICATE} \
+	-keyout ${KEY} \
+	-subj "/C=${COUNTRY}/ST=${STATE}/L=${LOCALITY}/O=${ORGANIZATION}/OU=${UNIT}/CN=${COMMON_NAME}"
 ```
 6. Copy the configuration files to the container and complete the server.conf file with the variables that will be passed by the .env file.
 ```Dockerfile
-COPY conf/nginx.conf	/etc/nginx/
-COPY conf/server.conf	/etc/nginx/conf.d/
+COPY	conf/nginx.conf	/etc/nginx/
+COPY	conf/server.conf	/etc/nginx/conf.d/
 
 RUN	echo "\tserver name ${COMMON_NAME};\n\
-		\tssl_certificate ${CERTIFICATE};\n\
-		\tssl_certificate_key ${KEY};\n\
-		}" >> /etc/nginx/conf.d/server.conf
+	\tssl_certificate ${CERTIFICATE};\n\
+	\tssl_certificate_key ${KEY};\n\
+	}" >> /etc/nginx/conf.d/server.conf
 ```
 7. Create the folder for the wordpress files and change its owner to `www-data` user.
 ```Dockerfile
@@ -297,11 +297,11 @@ CMD	["nginx", "-g", "daemon off;"]
 #### 1.3.2. server.conf
 The important thing here is change the set the port to 443 and ssl protocols to TLSv1.2 and the root folder to `/var/www/inception/`.
 ```conf
-	listen 443 ssl;
-	listen [::]:443 ssl;
-	ssl_protocols TLSv1.2;
-	root /var/www/inception/;
-	index index.php index.html;
+listen 443 ssl;
+listen [::]:443 ssl;
+ssl_protocols TLSv1.2;
+root /var/www/inception/;
+index index.php index.html;
 ```
 At the end, the file has missing lines that will be completed in the Dockerfile. These are the information about the certificates that will be passed by the .env file. It's important that we never public files with confidential information.
 
@@ -337,10 +337,8 @@ Files: [requirements](https://github.com/waltergcc/42-inception/tree/main/incept
 Now you'll create a folder called `requirements` and inside it put all the folders that we created before. Then, create a file called `docker-compose.yml` and a file called `.env`.
 
 ### 2.1. docker-compose.yml
-Start it with the following lines. The version is the version of the docker-compose file, and services is where we'll define our services.
+Start it with the following line to start the services definition.
 ```yml
-version: '3.8'
-
 services:
 ```
 Then define the mariadb service. It's field are self-explanatory. Build is where the Dockerfile is, volumes is where the database files will be saved in the container, networks is the network that the container will use, init is used to run the setup.sh script, restart is used to restart the container if it fails, and env_file is the file that contains the variables that will be used in the container.
