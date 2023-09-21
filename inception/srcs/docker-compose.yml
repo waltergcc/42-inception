@@ -1,0 +1,98 @@
+services:
+
+  # mariadb container ------------------------------------------------------------
+
+  # this is the only container that no depend on the others, so its the first to be created
+  mariadb:
+    container_name: mariadb
+    build: ./requirements/mariadb/
+    volumes:
+      - database:/var/lib/mysql/
+    networks:
+      - all
+    init: true
+    restart: on-failure
+    env_file:
+      - .env
+
+  # wordpress container ------------------------------------------------------------
+
+  # this is the second container to be created, it depends on the mariadb container
+  wordpress:
+    container_name: wordpress
+    build: ./requirements/wordpress/
+    volumes:
+      - wordpress_files:/var/www/inception/
+    networks:
+      - all
+    init: true
+    restart: on-failure
+    env_file:
+      - .env
+    depends_on:
+      - mariadb
+
+  # nginx container ------------------------------------------------------------
+
+  # this is the last container to be created, it depends on the wordpress container
+  # it use args to pass the certificate and key path to the Dockerfile
+  # in the build moment with show the private informations that where in the .env file
+  nginx:
+    container_name: nginx
+    build:
+      context: ./requirements/nginx/
+      args:
+        CERT_FOLDER: ${CERT_FOLDER}
+        CERTIFICATE: ${CERTIFICATE}
+        KEY: ${KEY}
+        COUNTRY: ${COUNTRY}
+        STATE: ${STATE}
+        LOCALITY: ${LOCALITY}
+        ORGANIZATION: ${ORGANIZATION}
+        UNIT: ${UNIT}
+        COMMON_NAME: ${COMMON_NAME}
+    ports:
+      - '443:443'
+    volumes:
+      - wordpress_files:/var/www/inception/
+    networks:
+      - all
+    init: true
+    restart: on-failure
+    env_file:
+      - .env
+    depends_on:
+      - wordpress
+
+# volumes --------------------------------------------------------------------
+
+# keeps the data shared between the containers
+# it acts like a shared hard drive between the containers and the host machine
+# device: where the data will be stored in the host machine
+volumes:
+
+  # keeps the database
+  database:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ~/data/database
+
+  # keeps the wordpress files
+  wordpress_files:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ~/data/wordpress_files
+
+# networks --------------------------------------------------------------------
+
+# this network is used to connect the containers
+# it acts like a virtual switch between the containers
+# all is the name of the network
+# bridge is the type of the network
+networks:
+  all:
+    driver: bridge

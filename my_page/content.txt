@@ -1,0 +1,40 @@
+My page config
+
+Context menu
+Home
+
+Feedback
+https://wcorrea-.42.fr/?p=1
+
+Sample
+https://wcorrea-.42.fr/?page_id=2
+
+Linkedin
+https://github.com/waltergcc
+
+Github
+Unlocking the Power of Containerization with Docker-compose
+
+H1
+Learning to work with containers
+
+H2
+Unlocking the Power of Containerization with Docker-compose
+
+Post
+This project goal is to take us beyond traditional VM’s and introduce us to the world of containers. With the Docker tool, we can instantiate specific software resources for a particular task without the need to allocate all of the machine’s resources.
+
+The page you are reading right now is hosted on NGINX, using the WordPress interface, with MariaDB as the database. Each of these containers is running independently while remaining in sync with one another. The world of containers is truly remarkable!
+
+NGINX Server
+High-performance web server and reverse proxy known for efficient request handling, HTTPS support, load balancing, and caching.
+
+Wordpress + PHP
+Popular content management system (CMS) enabling easy website creation and management with a user-friendly interface, themes, and plugins.
+
+MariaDB
+A powerful open-source relational database management system (RDBMS) that provides reliable data storage and management for various applications.
+
+Footpage
+Copyright 2023 – Inception by wcorrea-
+
