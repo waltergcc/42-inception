@@ -1,9 +1,47 @@
 # Inception
 
-This project is an introduction to the DevOps world. We will learn how to use `docker` and `docker-compose` to deploy a small web application. 
+This project is an introduction to the DevOps world. We will learn how to use `docker` and `docker-compose` to deploy a small web application.
 
 ## Before you start
 This project will cover concepts that we didn't see previously, so I recommend you to start backward to front in your PC, then you try it in the VM. On this page I'll leave a guide that will follow this order. At the end, you will have a VM with docker and docker-compose installed, and you will be able to deploy a wordpress website with a mariadb database hosted with NGINX server to delivery this project.
+
+## Table of Contents
+- [1. The Containers](#1-the-containers)
+	- [1.1. mariaDB](#11-mariadb)
+		- [1.1.1. Dockerfile](#111-dockerfile)
+		- [1.1.2. 50-server.cnf](#112-50-servercnf)
+		- [1.1.3. setup.sh](#113-setupsh)
+		- [1.1.4. Test the mariadb container](#114-test-the-mariadb-container)
+	- [1.2. Wordpress](#12-wordpress)
+		- [1.2.1. Dockerfile](#121-dockerfile)
+		- [1.2.2. www.conf](#122-wwwconf)
+		- [1.2.3. wp-config.php](#123-wp-configphp)
+		- [1.2.4. setup.sh](#124-setupsh)
+		- [1.2.5. Test the wordpress container](#125-test-the-wordpress-container)
+	- [1.3. NGINX](#13-nginx)
+		- [1.3.1. The Dockerfile](#131-the-dockerfile)
+		- [1.3.2. server.conf](#132-serverconf)
+		- [1.3.3. nginx.conf](#133-nginxconf)
+		- [1.3.4. Test the nginx image](#134-test-the-nginx-image)
+- [2. Docker-compose](#2-docker-compose)
+	- [2.1. docker-compose.yml](#21-docker-composeyml)
+	- [2.2. .env](#22-env)
+	- [2.3. docker-compose test](#23-docker-compose-test)
+- [3. The Makefile](#3-the-makefile)
+- [4. The VM](#4-the-vm)
+	- [4.1. VM creation](#41-vm-creation)
+	- [4.2. Debian installation](#42-debian-installation)
+	- [4.3. VM Setup](#43-vm-setup)
+		- [4.3.1. Add user as sudo](#431-add-user-as-sudo)
+		- [4.3.2. Enable Shared Folders](#432-enable-shared-folders)
+		- [4.3.3. Install Docker and docker-compose](#433-install-docker-and-docker-compose)
+		- [4.3.4. Install make and hostsed](#434-install-make-and-hostsed)
+- [5. The Website](#5-the-website)
+	- [5.1. Add your files in the VM](#51-add-your-files-in-the-vm)
+	- [5.2. Start the containers](#52-start-the-containers)
+	- [5.3. Credentials check](#53-credentials-check)
+	- [5.4. mariaDB check](#54-mariadb-check)
+	
 
 ## 1. The Containers
 
@@ -614,7 +652,7 @@ docker run hello-world
 ```bash
 sudo apt-get install -y make hostsed
 ```
-## 5. Running your application in the VM
+## 5. The Website
 
 ### 5.1. Add your files in the VM
 1. Copy your repo link in your main PC and go to the shared folder. Then clone it or copy and paste your files in the shared folder.
