@@ -1,9 +1,11 @@
 # Inception
 
-This project is an introduction to the DevOps world. We will learn how to use `docker` and `docker-compose` to deploy a small web application.
+This project is an introduction to the DevOps world. Its purpose is to introduce us to the use of docker and docker-compose to deploy a small web server that use the NGINX server with a Wordpress website and a MariaDB database. It's a simple project, but it's very important to understand the DevOps basic concepts. 
 
-## Before you start
-This project will cover concepts that we didn't see previously, so I recommend you to start backward to front in your PC, then you try it in the VM. On this page I'll leave a guide that will follow this order. At the end, you will have a VM with docker and docker-compose installed, and you will be able to deploy a wordpress website with a mariadb database hosted with NGINX server to delivery this project.
+## Grade: 100/100
+
+# The Inception Guide
+This project will cover concepts that we didn't see previously, so I recommend you to start backward to front in your PC, then you try it in the VM. On this page I'll leave a guide that will follow this order. At the end, you will have a VM with docker and docker-compose installed, and you'll be able to deploy a wordpress website with a mariadb database hosted with NGINX server.
 
 ## Table of Contents
 - [1. The Containers](#1-the-containers)
@@ -617,6 +619,8 @@ sudo usermod -a -G vboxsf your_user
 sudo chown -R your_user:users /media/
 ```
 6. Logout and login again to apply the changes. Now, you can see the shared folder in the `/media` folder as a external device.
+7.(Optional) If you want to enable the copy and paste between the VM and your main PC, go to the VM menu > Devices > Shared Clipboard > Bidirectional. With this option, you can copy and paste text between the VM and your main PC.
+
 #### 4.3.3. Install Docker and docker-compose
 Prepare the docker repository installation
 ```bash
