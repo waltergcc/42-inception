@@ -619,7 +619,7 @@ sudo usermod -a -G vboxsf your_user
 sudo chown -R your_user:users /media/
 ```
 6. Logout and login again to apply the changes. Now, you can see the shared folder in the `/media` folder as a external device.
-7.(Optional) If you want to enable the copy and paste between the VM and your main PC, go to the VM menu > Devices > Shared Clipboard > Bidirectional. With this option, you can copy and paste text between the VM and your main PC.
+7. (Optional) If you want to enable the copy and paste between the VM and your main PC, go to the VM menu > Devices > Shared Clipboard > Bidirectional. With this option, you can copy and paste text between the VM and your main PC.
 
 #### 4.3.3. Install Docker and docker-compose
 Prepare the docker repository installation
