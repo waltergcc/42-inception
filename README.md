@@ -97,13 +97,15 @@ It's a default file without the commented lines. The important thing here is cha
 ```bash
 service mariadb start
 ```
-2. Create the database and the users. To check if all is ok, we'll declare these variables in the own script, but in the final version we'll have a .env file with all the variables. So you need to remove these declaration lines.
+2. To check if all is ok, we'll declare these variables in the own script, but in the final version we'll have a .env file with all the variables. So you need to remove these declaration lines.
 ```bash
 DB_NAME=thedatabase
 DB_USER=theuser
 DB_PASSWORD=abc
 DB_PASS_ROOT=123
-
+```
+3. Create the database and the users with its passwords and permissions.
+```bash
 mariadb -v -u root << EOF
 CREATE DATABASE IF NOT EXISTS $DB_NAME;
 CREATE USER IF NOT EXISTS '$DB_USER'@'%' IDENTIFIED BY '$DB_PASSWORD';
@@ -112,12 +114,12 @@ GRANT ALL PRIVILEGES ON $DB_NAME.* TO 'root'@'%' IDENTIFIED BY '$DB_PASS_ROOT';
 SET PASSWORD FOR 'root'@'localhost' = PASSWORD('$DB_PASS_ROOT');
 EOF
 ```
-3. Prepare to restart the server to apply the changes. The `sleep` command is used to avoid errors before stopping the server.
+4. Prepare to restart the server to apply the changes. The `sleep` command is used to avoid errors before stopping the server.
 ```bash
 sleep 5
 service mariadb stop
 ```
-4. Restart the server with the command passed as argument in the `Dockerfile`.
+5. Restart the server with the command passed as argument in the `Dockerfile`.
 ```bash
 exec $@
 ```
