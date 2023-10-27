@@ -478,34 +478,34 @@ Now, the .env file will have the following variables:
 
 ```bash
 # Database settings
-DB_NAME=XXXXXXXX
-DB_USER=XXXXXXXX
-DB_PASSWORD=XXXXXXXX
-DB_HOST=XXXXXXXX
-DB_PASS_ROOT=XXXXXXXX
+DB_NAME=thedatabase
+DB_USER=theuser
+DB_PASSWORD=abc
+DB_PASS_ROOT=123
+DB_HOST=mariadb
 
 # Wordpress settings
-WP_URL=XXXXXXXX
-WP_TITLE=XXXXXXXX
-WP_ADMIN_USER=XXXXXXXX
-WP_ADMIN_PASSWORD=XXXXXXXX
-WP_ADMIN_EMAIL=XXXXXXXX
-WP_USER=XXXXXXXX
-WP_PASSWORD=XXXXXXXX
-WP_EMAIL=XXXXXXXX
-WP_ROLE=XXXXXXXX
-WP_FULL_URL=XXXXXXXX
+WP_URL=login.42.fr
+WP_TITLE=Inception
+WP_ADMIN_USER=theroot
+WP_ADMIN_PASSWORD=123
+WP_ADMIN_EMAIL=theroot@123.com
+WP_USER=theuser
+WP_PASSWORD=abc
+WP_EMAIL=theuser@123.com
+WP_ROLE=editor
+WP_FULL_URL=https://login.42.fr
 
 # SSL settings
-CERT_FOLDER=XXXXXXXX
-CERTIFICATE=XXXXXXXX
-KEY=XXXXXXXX
-COUNTRY=XXXXXXXX
-STATE=XXXXXXXX
-LOCALITY=XXXXXXXX
-ORGANIZATION=XXXXXXXX
-UNIT=XXXXXXXX
-COMMON_NAME=XXXXXXXX
+CERT_FOLDER=/etc/nginx/certs/
+CERTIFICATE=/etc/nginx/certs/certificate.crt
+KEY=/etc/nginx/certs/certificate.key
+COUNTRY=BR
+STATE=BA
+LOCALITY=Salvador
+ORGANIZATION=42
+UNIT=42
+COMMON_NAME=login.42.fr
 ```
 ### 2.3. docker-compose test
 Now, all is setup correctly, so we can start the containers together. Go to the folder that contains the docker-compose.yml file and run the following command:
