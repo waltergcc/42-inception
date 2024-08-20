@@ -4,7 +4,7 @@
 # it install nginx and openssl, create a self-signed certificate and copy the configuration files
 # the ARG call receive args from the docker-compose.yml file that is given by the .env file
 # it is the only way that I could find to pass the args to the dockerfile
-# the RUN echo completes the server.conf file with the private information 
+# the RUN echo completes the server.conf file with the private information
 # the penultimate RUN define the www-data user as the owner of the /var/www/
 # at the end it runs starts the nginx server in the foreground
 
@@ -38,7 +38,7 @@ RUN mkdir -p ${CERT_FOLDER} && \
 COPY	conf/nginx.conf	/etc/nginx/
 COPY	conf/server.conf	/etc/nginx/conf.d/
 
-RUN		echo "\tserver name ${COMMON_NAME};\n\
+RUN		echo "\tserver_name ${COMMON_NAME};\n\
 			\tssl_certificate ${CERTIFICATE};\n\
 			\tssl_certificate_key ${KEY};\n\
 			}" >> /etc/nginx/conf.d/server.conf

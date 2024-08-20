@@ -1,6 +1,6 @@
 # Inception
 
-This project is an introduction to the DevOps world. Its purpose is to introduce us to the use of docker and docker-compose to deploy a small web server that use the NGINX server with a Wordpress website and a MariaDB database. It's a simple project, but it's very important to understand the DevOps basic concepts. 
+This project is an introduction to the DevOps world. Its purpose is to introduce us to the use of docker and docker-compose to deploy a small web server that use the NGINX server with a Wordpress website and a MariaDB database. It's a simple project, but it's very important to understand the DevOps basic concepts.
 
 ## Grade: 100/100
 
@@ -43,7 +43,7 @@ This project will cover concepts that we didn't see previously, so I recommend y
 	- [5.2. Start the containers](#52-start-the-containers)
 	- [5.3. Credentials check](#53-credentials-check)
 	- [5.4. mariaDB check](#54-mariadb-check)
-	
+
 
 ## 1. The Containers
 
@@ -142,7 +142,7 @@ With the ID copied, run the next command to get inside the container. `exec` is 
 ```bash
 docker exec -it copiedID /bin/bash
 ```
-Now, you are inside the container. Run the following command to check if the database is created correctly and running. 
+Now, you are inside the container. Run the following command to check if the database is created correctly and running.
 ```bash
 mysql -u theuser -p thedatabase
 ```
@@ -170,7 +170,7 @@ ARG	PHPPATH=/etc/php/7.4/fpm
 ```Dockerfile
 RUN	service php7.4-fpm stop
 ```
-6. Copy the configuration file to the php folder, then change some values in the php config files. 
+6. Copy the configuration file to the php folder, then change some values in the php config files.
 ```Dockerfile
 COPY	conf/www.conf ${PHPPATH}/pool.d/
 RUN		sed -i 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' ${PHPPATH}/php.ini && \
@@ -268,7 +268,7 @@ fi;
 ```
 7. Download another theme and activate it. It's not necessary, but I did because I don't like the default theme.
 ```bash
-wp --allow-root --path="/var/www/inception/" theme install raft --activate 
+wp --allow-root --path="/var/www/inception/" theme install raft --activate
 ```
 8. start the php server in foreground.
 ```bash
@@ -297,7 +297,7 @@ Files: [Dockerfile](https://github.com/waltergcc/42-inception/blob/main/inceptio
 1. Use the debian 11 (bullseye) image
 2. Indicates that this container will be listening on port 443
 3. Update the system and install `nginx`, `openssl` only
-4. Define the ARG to use in the next commands. At the final version, we'll have a .env file with all the variables, so you need to remove these declaration lines and keep the line that call all variables. 
+4. Define the ARG to use in the next commands. At the final version, we'll have a .env file with all the variables, so you need to remove these declaration lines and keep the line that call all variables.
 ```Dockerfile
 ARG	CERT_FOLDER=/etc/nginx/certs/
 ARG	CERTIFICATE=/etc/nginx/certs/certificate.crt
@@ -322,7 +322,7 @@ RUN	mkdir -p ${CERT_FOLDER} && \
 COPY	conf/nginx.conf	/etc/nginx/
 COPY	conf/server.conf	/etc/nginx/conf.d/
 
-RUN	echo "\tserver name ${COMMON_NAME};\n\
+RUN	echo "\tserver_name ${COMMON_NAME};\n\
 	\tssl_certificate ${CERTIFICATE};\n\
 	\tssl_certificate_key ${KEY};\n\
 	}" >> /etc/nginx/conf.d/server.conf
@@ -364,7 +364,7 @@ docker images
 docker rmi -f nginx
 ```
 ## 2. Docker-compose
-Now that we have all Dockerfiles working well, we'll create the docker-compose file to run all containers together. Before we start, we need to create setup the docker-compose plugin. 
+Now that we have all Dockerfiles working well, we'll create the docker-compose file to run all containers together. Before we start, we need to create setup the docker-compose plugin.
 
 Check if the plugin is already installed with the command:
 ```bash
@@ -461,14 +461,14 @@ volumes:
       o: bind
       device: ~/data/wordpress_files
 ```
-The networks define the network that the containers will use to communicate with each other. This is like a virtual switch that will connect the containers. 
+The networks define the network that the containers will use to communicate with each other. This is like a virtual switch that will connect the containers.
 ```yml
 networks:
   all:
     driver: bridge
 ```
 ### 2.2. .env
-In this file, we'll put all the variables that we'll use in the docker-compose file. It's important that we never public files with confidential information. You'll put your .env file in the repo only in the evaluation time. Don't forget to remove the test variables that we used before in `mariadb/tools/setup.sh`, `wordpress/conf/wp-config.php`, `wordpress/tools/setup.sh` and `nginx/Dockerfile`. 
+In this file, we'll put all the variables that we'll use in the docker-compose file. It's important that we never public files with confidential information. You'll put your .env file in the repo only in the evaluation time. Don't forget to remove the test variables that we used before in `mariadb/tools/setup.sh`, `wordpress/conf/wp-config.php`, `wordpress/tools/setup.sh` and `nginx/Dockerfile`.
 
 In the nginx Dockerfile we'll keep this line:
 ```Dockerfile
@@ -525,7 +525,7 @@ docker stop $(docker ps -qa) && \
 	docker network rm $(docker network ls -q) 2> /dev/null
 ```
 ## 3. The Makefile
-Files: [srcs](https://github.com/waltergcc/42-inception/tree/main/inception/srcs), 
+Files: [srcs](https://github.com/waltergcc/42-inception/tree/main/inception/srcs),
  [Makefile](https://github.com/waltergcc/42-inception/blob/main/inception/Makefile)
 
 Before all, create a folder called `srcs` and put all files that we created before inside it.
